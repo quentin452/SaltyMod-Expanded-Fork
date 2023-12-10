@@ -261,7 +261,7 @@ public class SaltLakeGenerator implements IWorldGenerator {
             crustMeta = 10;
         } else if ((mask1 == 0 && mask2 == 11) || (mask1 == 1 && (mask2 == 2 || mask2 == 3 || mask2 == 10 || mask2 == 11)) || (mask1 == 2 && mask2 >= 8 && mask2 <= 11) || (mask1 == 3 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 8 && mask2 <= 11)))) {
             crustMeta = 11;
-        } else if ((mask1 == 0 && mask2 == 7) || (mask1 == 2 && mask2 >= 4 && mask2 <= 7) || (mask1 == 4 && (mask2 == 1 || mask2 == 3 || mask2 == 5 || mask2 == 7)) || (mask1 == 6 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 4 && mask2 <= 7)))) {
+        } else if (mask1 == 0 && mask2 == 7 || mask1 == 2 && mask2 <= 7 || mask1 == 4 && (mask2 == 1 || mask2 == 3 || mask2 == 5 || mask2 == 7) || mask1 == 6 && (mask2 >= 0 && mask2 <= 3 || mask2 >= 4 && mask2 <= 7)) {
             crustMeta = 12;
         } else if ((mask1 == 0 && mask2 == 14) || (mask1 == 4 && (mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14)) || (mask1 == 8 && (mask2 == 2 || mask2 == 6 || mask2 == 10 || mask2 == 14)) || (mask1 == 12 && (mask2 == 0 || mask2 == 2 || mask2 == 4 || mask2 == 6 || mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14))) {
             crustMeta = 13;
