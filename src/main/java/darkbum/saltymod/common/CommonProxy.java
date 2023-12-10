@@ -1,6 +1,7 @@
 package darkbum.saltymod.common;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -141,7 +142,6 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
-
         if (ModConfiguration.enableEvaporator) {
             if (FluidRegistry.isFluidRegistered("milk")) {
                 Fluid milk = FluidRegistry.getFluid("milk");
@@ -152,7 +152,8 @@ public class CommonProxy {
                 FluidContainerRegistry.registerFluidContainer(new FluidStack(CommonProxy.milk, 1000), new ItemStack(Items.milk_bucket), FluidContainerRegistry.EMPTY_BUCKET);
                 EvaporateRegistry.instance().addEvaporating(CommonProxy.milk, ModItems.powdered_milk, 1000, 0.0F);
             }
-            if (FluidRegistry.isFluidRegistered("blood")) {
+            if(Loader.isModLoaded("BiomesOPlenty") && ModConfiguration.enableBOPFoods) {
+                if (FluidRegistry.isFluidRegistered("blood")) {
                 Fluid blood = FluidRegistry.getFluid("blood");
                 GameRegistry.registerItem(ModItems.bop_hemoglobin, "hemoglobin");
                 EvaporateRegistry.instance().addEvaporating(blood, ModItems.bop_hemoglobin, 1000, 1.0F);
@@ -170,6 +171,7 @@ public class CommonProxy {
                 EvaporateRegistry.instance().addEvaporating(poisonFl, ModItems.bop_poison, 1000, 1.0F);
                 GameRegistry.addShapelessRecipe(bop_poisondart, new ItemStack(bop_dart), ModItems.bop_poison);
             }
+        }
         }
     }
 }
