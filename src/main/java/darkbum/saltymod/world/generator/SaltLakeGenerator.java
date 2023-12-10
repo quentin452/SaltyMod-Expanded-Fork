@@ -121,34 +121,7 @@ public class SaltLakeGenerator implements IWorldGenerator {
                                     mask2 += 4;
                                 if (world.getBlock(x - 1, originY - 2, z - 1) == ModBlocks.salt_lake_ore)
                                     mask2 += 8;
-                                int crustMeta = 0;
-                                if (mask1 == 0 && mask2 == 1) {
-                                    crustMeta = 3;
-                                } else if (mask1 == 0 && mask2 == 2) {
-                                    crustMeta = 4;
-                                } else if (mask1 == 0 && mask2 == 4) {
-                                    crustMeta = 5;
-                                } else if (mask1 == 0 && mask2 == 8) {
-                                    crustMeta = 6;
-                                } else if ((mask1 == 0 && mask2 == 9) || (mask1 == 1 && (mask2 <= 1 || mask2 == 8 || mask2 == 9))) {
-                                    crustMeta = 7;
-                                } else if ((mask1 == 0 && mask2 == 3) || (mask1 == 2 && (mask2 <= 1 || mask2 == 2 || mask2 == 3))) {
-                                    crustMeta = 8;
-                                } else if ((mask1 == 0 && mask2 == 6) || (mask1 == 4 && (mask2 == 0 || mask2 == 2 || mask2 == 4 || mask2 == 6))) {
-                                    crustMeta = 9;
-                                } else if ((mask1 == 0 && mask2 == 12) || (mask1 == 8 && (mask2 == 0 || mask2 == 4 || mask2 == 8 || mask2 == 12))) {
-                                    crustMeta = 10;
-                                } else if ((mask1 == 0 && mask2 == 11) || (mask1 == 1 && (mask2 == 2 || mask2 == 3 || mask2 == 10 || mask2 == 11)) || (mask1 == 2 && mask2 >= 8 && mask2 <= 11) || (mask1 == 3 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 8 && mask2 <= 11)))) {
-                                    crustMeta = 11;
-                                } else if ((mask1 == 0 && mask2 == 7) || (mask1 == 2 && mask2 >= 4 && mask2 <= 7) || (mask1 == 4 && (mask2 == 1 || mask2 == 3 || mask2 == 5 || mask2 == 7)) || (mask1 == 6 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 4 && mask2 <= 7)))) {
-                                    crustMeta = 12;
-                                } else if ((mask1 == 0 && mask2 == 14) || (mask1 == 4 && (mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14)) || (mask1 == 8 && (mask2 == 2 || mask2 == 6 || mask2 == 10 || mask2 == 14)) || (mask1 == 12 && (mask2 == 0 || mask2 == 2 || mask2 == 4 || mask2 == 6 || mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14))) {
-                                    crustMeta = 13;
-                                } else if ((mask1 == 0 && mask2 == 13) || (mask1 == 1 && (mask2 == 4 || mask2 == 5 || mask2 == 12 || mask2 == 13)) || (mask1 == 8 && (mask2 == 1 || mask2 == 5 || mask2 == 9 || mask2 == 13)) || (mask1 == 9 && (mask2 == 0 || mask2 == 1 || mask2 == 4 || mask2 == 5 || mask2 == 8 || mask2 == 9 || mask2 == 12 || mask2 == 13))) {
-                                    crustMeta = 14;
-                                } else {
-                                    crustMeta = 15;
-                                }
+                                int crustMeta = getCrustMeta(mask1, mask2);
                                 if (mask1 > 0) {
                                     if (world.getBlock(x, originY - 2, z) != ModBlocks.salt_lake_dirt && world.getBlock(x, originY - 2, z) != ModBlocks.salt_dirt && world.getBlock(x, originY - 2, z) != ModBlocks.salt_ore)
                                         if (world.isAirBlock(x - 1, originY - 2, z) || world.isAirBlock(x + 1, originY - 2, z) || world
@@ -266,6 +239,38 @@ public class SaltLakeGenerator implements IWorldGenerator {
             originX = originX + rand.nextInt(ModConfiguration.saltLakeDistance) - ModConfiguration.saltLakeDistance / 2;
             originZ = originZ + rand.nextInt(ModConfiguration.saltLakeDistance) - ModConfiguration.saltLakeDistance / 2;
         }
+    }
+
+    private static int getCrustMeta(int mask1, int mask2) {
+        int crustMeta;
+        if (mask1 == 0 && mask2 == 1) {
+            crustMeta = 3;
+        } else if (mask1 == 0 && mask2 == 2) {
+            crustMeta = 4;
+        } else if (mask1 == 0 && mask2 == 4) {
+            crustMeta = 5;
+        } else if (mask1 == 0 && mask2 == 8) {
+            crustMeta = 6;
+        } else if ((mask1 == 0 && mask2 == 9) || (mask1 == 1 && (mask2 <= 1 || mask2 == 8 || mask2 == 9))) {
+            crustMeta = 7;
+        } else if ((mask1 == 0 && mask2 == 3) || (mask1 == 2 && (mask2 <= 1 || mask2 == 2 || mask2 == 3))) {
+            crustMeta = 8;
+        } else if ((mask1 == 0 && mask2 == 6) || (mask1 == 4 && (mask2 == 0 || mask2 == 2 || mask2 == 4 || mask2 == 6))) {
+            crustMeta = 9;
+        } else if ((mask1 == 0 && mask2 == 12) || (mask1 == 8 && (mask2 == 0 || mask2 == 4 || mask2 == 8 || mask2 == 12))) {
+            crustMeta = 10;
+        } else if ((mask1 == 0 && mask2 == 11) || (mask1 == 1 && (mask2 == 2 || mask2 == 3 || mask2 == 10 || mask2 == 11)) || (mask1 == 2 && mask2 >= 8 && mask2 <= 11) || (mask1 == 3 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 8 && mask2 <= 11)))) {
+            crustMeta = 11;
+        } else if ((mask1 == 0 && mask2 == 7) || (mask1 == 2 && mask2 >= 4 && mask2 <= 7) || (mask1 == 4 && (mask2 == 1 || mask2 == 3 || mask2 == 5 || mask2 == 7)) || (mask1 == 6 && ((mask2 >= 0 && mask2 <= 3) || (mask2 >= 4 && mask2 <= 7)))) {
+            crustMeta = 12;
+        } else if ((mask1 == 0 && mask2 == 14) || (mask1 == 4 && (mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14)) || (mask1 == 8 && (mask2 == 2 || mask2 == 6 || mask2 == 10 || mask2 == 14)) || (mask1 == 12 && (mask2 == 0 || mask2 == 2 || mask2 == 4 || mask2 == 6 || mask2 == 8 || mask2 == 10 || mask2 == 12 || mask2 == 14))) {
+            crustMeta = 13;
+        } else if ((mask1 == 0 && mask2 == 13) || (mask1 == 1 && (mask2 == 4 || mask2 == 5 || mask2 == 12 || mask2 == 13)) || (mask1 == 8 && (mask2 == 1 || mask2 == 5 || mask2 == 9 || mask2 == 13)) || (mask1 == 9 && (mask2 == 0 || mask2 == 1 || mask2 == 4 || mask2 == 5 || mask2 == 8 || mask2 == 9 || mask2 == 12 || mask2 == 13))) {
+            crustMeta = 14;
+        } else {
+            crustMeta = 15;
+        }
+        return crustMeta;
     }
 
 }
