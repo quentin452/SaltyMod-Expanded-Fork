@@ -888,7 +888,7 @@ public class ModConfiguration extends Configuration {
             "\nSalt Crusted Oak Logs" +
             "\nMarsh Reeds" +
             "\n");
-        saltMarshBiomeID = getInt("02-saltMarshBiomeID", categoryWorldGenerationBiomes, 40, 40, 40, "Sets the Biome ID of the Salt Marsh Biome, setting this to \"-1\" completely disables the Biome");
+        saltMarshBiomeID = getInt("02-saltMarshBiomeID", categoryWorldGenerationBiomes, 40, 0, 255, "Sets the Biome ID of the Salt Marsh Biome, setting this to \"-1\" completely disables the Biome");
         saltMarshBiomeWeight = getInt("03-saltMarshBiomeWeight", categoryWorldGenerationBiomes, 10, 10, 10, "Regulates the Generation chance of Salt Marsh Biomes");
         saltMarshAdditionalSaltOre = getBoolean("04-saltMarshAdditionalSaltOre", categoryWorldGenerationBiomes, true, "Enables additional Salt Ore Generation in Salt Marsh Biomes");
         saltMarshSaltOreFrequency = getInt("05-saltMarshSaltOreFrequency", categoryWorldGenerationBiomes, 4, 1, 10, "Regulates the frequency of the additional Salt Ore Generation in Salt Marsh Biomes");
