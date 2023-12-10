@@ -1,0 +1,76 @@
+{
+"block.dry_mud_bricks.break": {
+    "category": "block",
+    "sounds": [
+      "block/dry_mud_bricks/break1",
+      "block/dry_mud_bricks/break2",
+      "block/dry_mud_bricks/break3",
+      "block/dry_mud_bricks/break4",
+      "block/dry_mud_bricks/break5",
+      "block/dry_mud_bricks/break6"
+    ]
+  },
+"block.dry_mud_bricks.step": {
+    "category": "block",
+    "sounds": [
+      "block/dry_mud_bricks/step1",
+      "block/dry_mud_bricks/step2",
+      "block/dry_mud_bricks/step3",
+      "block/dry_mud_bricks/step4",
+      "block/dry_mud_bricks/step5",
+      "block/dry_mud_bricks/step6"
+    ]
+  },
+"block.mud.break": {
+    "category": "block",
+    "sounds": [
+      "block/mud/break1",
+      "block/mud/break2",
+      "block/mud/break3",
+      "block/mud/break4",
+      "block/mud/break5",
+      "block/mud/break6"
+    ]
+  },
+"block.mud.step": {
+    "category": "block",
+    "sounds": [
+      "block/mud/step1",
+      "block/mud/step2",
+      "block/mud/step3",
+      "block/mud/step4",
+      "block/mud/step5",
+      "block/mud/step6"
+    ]
+  },
+"block.wet_mud_bricks.break": {
+    "category": "block",
+    "sounds": [
+      "block/wet_mud_bricks/break1",
+      "block/wet_mud_bricks/break2",
+      "block/wet_mud_bricks/break3",
+      "block/wet_mud_bricks/break4",
+      "block/wet_mud_bricks/break5",
+      "block/wet_mud_bricks/break6"
+    ]
+  },
+"block.wet_mud_bricks.step": {
+    "category": "block",
+    "sounds": [
+	  "block/wet_mud_bricks/step1",
+      "block/wet_mud_bricks/step2",
+      "block/wet_mud_bricks/step3",
+      "block/wet_mud_bricks/step4",
+      "block/wet_mud_bricks/step5",
+      "block/wet_mud_bricks/step6"
+    ]
+  },
+"block.blossom_burrow.bees": {
+	"category": "block",
+	"sounds": [
+	  "block/blossom_burrow/bees1",
+	  "block/blossom_burrow/bees2",
+	  "block/blossom_burrow/bees3"
+	]
+  }
+}
