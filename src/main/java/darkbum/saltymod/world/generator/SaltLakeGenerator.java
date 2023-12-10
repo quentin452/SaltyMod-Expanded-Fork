@@ -50,49 +50,42 @@ public class SaltLakeGenerator implements IWorldGenerator {
                     world.setBlock(originX, originY - 4, originZ, ModBlocks.salt_ore);
                     world.setBlock(originX, originY - 5, originZ, Blocks.stone);
                     world.setBlock(originX, originY - 6, originZ, Blocks.stone);
-                    for(int i = 2; i <= radius; i++) {
-                        int j;
-                        for(j = originX - i; j <= originX + i; j++) {
-                            for(int z = originZ - i; z <= originZ + i; z++) {
-                                if (rand.nextInt(2) == 0 &&
-                                    world.getBlock(j - 1, originY, z).getMaterial().isSolid() &&
-                                    world.getBlock(j + 1, originY, z).getMaterial().isSolid() &&
-                                    world.getBlock(j, originY, z - 1).getMaterial().isSolid() &&
-                                    world.getBlock(j, originY, z + 1).getMaterial().isSolid() &&
-                                    world.getBlock(j, originY - 3, z).getMaterial().isSolid() &&
-                                    world.getFullBlockLightValue(j, originY + 1, z) >= 14 &&
-                                    (world.getBlock(j - 1, originY - 2, z) == ModBlocks.salt_lake_ore ||
-                                        world.getBlock(j + 1, originY - 2, z) == ModBlocks.salt_lake_ore ||
-                                        world.getBlock(j, originY - 2, z - 1) == ModBlocks.salt_lake_ore ||
-                                        world.getBlock(j, originY - 2, z + 1) == ModBlocks.salt_lake_ore)) {
+                    for (int i = 2; i <= radius; i++) {
+                        for (int offsetX = -i; offsetX <= i; offsetX++) {
+                            for (int offsetZ = -i; offsetZ <= i; offsetZ++) {
+                                int j = originX + offsetX;
+                                int z = originZ + offsetZ;
+
+                                  if (isSolidAndWellLit(world, j, originY, z, rand)) {
                                     world.setBlockToAir(j, originY + 1, z);
                                     world.setBlockToAir(j, originY - 1, z);
                                     world.setBlock(j, originY - 2, z, ModBlocks.salt_block);
-                                }
-                            }
-                        }
-                        for (j = originX - i; j <= originX + i; j++) {
-                            for (int z = originZ - i; z <= originZ + i; z++) {
-                                if (world.getBlock(j, originY - 2, z) == ModBlocks.salt_block) {
-                                    world.setBlock(j, originY - 2, z, ModBlocks.salt_lake_ore);
-                                    world.setBlock(j, originY - 5, z, Blocks.stone);
-                                    if (rand.nextInt(2) == 0) {
-                                        world.setBlock(j, originY - 3, z, ModBlocks.salt_ore);
-                                        world.setBlock(j, originY - 6, z, Blocks.stone);
-                                        if (rand.nextInt(5) == 0) {
-                                            world.setBlock(j, originY - 4, z, ModBlocks.salt_ore);
+
+                                    if (world.getBlock(j, originY - 2, z) == ModBlocks.salt_block) {
+                                        world.setBlock(j, originY - 2, z, ModBlocks.salt_lake_ore);
+                                        world.setBlock(j, originY - 5, z, Blocks.stone);
+
+                                        if (rand.nextInt(2) == 0) {
+                                            world.setBlock(j, originY - 3, z, ModBlocks.salt_ore);
+                                            world.setBlock(j, originY - 6, z, Blocks.stone);
+
+                                            if (rand.nextInt(5) == 0) {
+                                                world.setBlock(j, originY - 4, z, ModBlocks.salt_ore);
+                                            } else {
+                                                world.setBlock(j, originY - 4, z, Blocks.stone);
+                                            }
                                         } else {
-                                            world.setBlock(j, originY - 4, z, Blocks.stone);
+                                            world.setBlock(j, originY - 3, z, Blocks.stone);
                                         }
-                                    } else {
-                                        world.setBlock(j, originY - 3, z, Blocks.stone);
+
+                                        if (world.getFullBlockLightValue(j, originY + 1, z) <= 14 && rand.nextInt(5) == 0) {
+                                            if (rand.nextInt(4) == 0) {
+                                                world.setBlock(j, originY - 1, z, ModBlocks.salt_crystal, 1, 3);
+                                            } else {
+                                                world.setBlock(j, originY - 1, z, ModBlocks.salt_crystal, 2, 3);
+                                            }
+                                        }
                                     }
-                                    if (world.getFullBlockLightValue(j, originY + 1, z) <= 14 && rand.nextInt(5) == 0)
-                                        if (rand.nextInt(4) == 0) {
-                                            world.setBlock(j, originY - 1, z, ModBlocks.salt_crystal, 1, 3);
-                                        } else {
-                                            world.setBlock(j, originY - 1, z, ModBlocks.salt_crystal, 2, 3);
-                                        }
                                 }
                             }
                         }
@@ -239,6 +232,21 @@ public class SaltLakeGenerator implements IWorldGenerator {
             originX = originX + rand.nextInt(ModConfiguration.saltLakeDistance) - ModConfiguration.saltLakeDistance / 2;
             originZ = originZ + rand.nextInt(ModConfiguration.saltLakeDistance) - ModConfiguration.saltLakeDistance / 2;
         }
+    }
+    private boolean isSolidAndWellLit(World world, int x, int y, int z, Random rand) {
+        boolean solidBase =
+            world.getBlock(x - 1, y, z).getMaterial().isSolid() &&
+                world.getBlock(x + 1, y, z).getMaterial().isSolid() &&
+                world.getBlock(x, y, z - 1).getMaterial().isSolid() &&
+                world.getBlock(x, y, z + 1).getMaterial().isSolid() &&
+                world.getBlock(x, y - 3, z).getMaterial().isSolid() &&
+                world.getFullBlockLightValue(x, y + 1, z) >= 14 &&
+                (world.getBlock(x - 1, y - 2, z) == ModBlocks.salt_lake_ore ||
+                    world.getBlock(x + 1, y - 2, z) == ModBlocks.salt_lake_ore ||
+                    world.getBlock(x, y - 2, z - 1) == ModBlocks.salt_lake_ore ||
+                    world.getBlock(x, y - 2, z + 1) == ModBlocks.salt_lake_ore);
+
+        return rand.nextInt(2) == 0 && solidBase;
     }
 
     private static int getCrustMeta(int mask1, int mask2) {
