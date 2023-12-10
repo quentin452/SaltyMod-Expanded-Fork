@@ -16,9 +16,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 
 public class SaltLakeGenerator implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-        if(world.provider.dimensionId == 0) {
-            generateOverworld(world, random, chunkX * 16, chunkZ * 16);
-        }
+        // This method is empty because there is a call of generateOverworld in SaltMarshDecorator
     }
 
     public void generateOverworld(World world, Random rand, int X1, int Z1) {
@@ -272,5 +270,4 @@ public class SaltLakeGenerator implements IWorldGenerator {
         }
         return crustMeta;
     }
-
 }

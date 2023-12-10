@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class SaltMarshPlantMix extends WorldGenerator {
 
-    private int groupsize;
+    private final int groupsize;
 
     public SaltMarshPlantMix(int size) {
         groupsize = size;

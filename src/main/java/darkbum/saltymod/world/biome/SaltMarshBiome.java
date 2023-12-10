@@ -56,14 +56,14 @@ public class SaltMarshBiome extends BiomeGenBase {
     @SideOnly(Side.CLIENT)
     @Override
     public int getBiomeGrassColor(int x, int y, int z) {
-        double noise = plantNoise.func_151601_a((double)x * 0.0225D, (double)z * 0.0225D);
+        double noise = plantNoise.func_151601_a(x * 0.0225D, z * 0.0225D);
         return noise < -0.01D ? 6331695 : 8953651;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public int getBiomeFoliageColor(int x, int y, int z) {
-        double noise = plantNoise.func_151601_a((double)x * 0.0225D, (double)z * 0.0225D);
+        double noise = plantNoise.func_151601_a(x * 0.0225D, z * 0.0225D);
         return noise < -0.01D ? 6331695 : 8953651;
     }
 
@@ -71,5 +71,4 @@ public class SaltMarshBiome extends BiomeGenBase {
     public void decorate(World world, Random rand, int x, int z) {
         decorator.decorate(world, rand, x, z);
     }
-
 }

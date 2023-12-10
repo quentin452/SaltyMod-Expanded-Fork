@@ -31,10 +31,8 @@ public class SaltMarshDecorator {
     }
 
     public final void decorate(World world, Random rand, int x, int z) {
-        int pass, passX, passZ;
-
         if(ModConfiguration.saltMarshAdditionalSaltOre) {
-            for(pass = 0; pass < ModConfiguration.saltMarshSaltOreFrequency; ++pass) {
+            for(int pass = 0; pass < ModConfiguration.saltMarshSaltOreFrequency; ++pass) {
                 worldGenSaltOre.generate(world, rand,
                     x + rand.nextInt(16),
                     rand.nextInt(96) + 1,
@@ -44,72 +42,48 @@ public class SaltMarshDecorator {
         }
 
         if(ModConfiguration.enableSaltLakes) {
-            for (pass = 0; pass < 7; ++pass) {
+            for (int pass = 0; pass < 7; ++pass) {
                 saltLakeGenerator.generateOverworld(world, rand, x + offsetXZ(rand), z + offsetXZ(rand));
             }
         }
 
-        for(pass = 0; pass < 5; ++pass) {
-            passX = x + offsetXZ(rand);
-            passZ = z + offsetXZ(rand);
+        for (int pass = 0; pass < 5; ++pass) {
+            int passX = x + offsetXZ(rand);
+            int passZ = z + offsetXZ(rand);
+
             newWorldGenClay.generate(world, rand,
                 passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
             );
+
+            saltMarshPlantMix.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
+            saltWortMix.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
         }
 
-        passX = x + offsetXZ(rand);
-        passZ = z + offsetXZ(rand);
+        for (int pass = 0; pass < 4; ++pass) {
+            int passX = x + offsetXZ(rand);
+            int passZ = z + offsetXZ(rand);
+
+            worldGenWaterlily.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
+        }
+
+        for (int pass = 0; pass < 3; ++pass) {
+            int passX = x + offsetXZ(rand);
+            int passZ = z + offsetXZ(rand);
+
+            worldGenReed.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
+        }
+
+        int passX = x + offsetXZ(rand);
+        int passZ = z + offsetXZ(rand);
+
         if(rand.nextInt(3) == 0) {
-            worldGenSaltTree.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
+            worldGenSaltTree.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
         }
 
-        passX = x + offsetXZ(rand);
-        passZ = z + offsetXZ(rand);
         if(rand.nextInt(20) == 0) {
-            worldGenSaltBigTree.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
+            worldGenSaltBigTree.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
         }
 
-        for(pass = 0; pass < 5; ++pass) {
-            passX = x + offsetXZ(rand);
-            passZ = z + offsetXZ(rand);
-            saltMarshPlantMix.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
-        }
-
-        for(pass = 0; pass < 5; ++pass) {
-            passX = x + offsetXZ(rand);
-            passZ = z + offsetXZ(rand);
-            saltWortMix.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
-        }
-
-        passX = x + offsetXZ(rand);
-        passZ = z + offsetXZ(rand);
-        alliumPatch.generate(world, rand,
-            passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-        );
-
-        for(pass = 0; pass < 4; ++pass) {
-            passX = x + offsetXZ(rand);
-            passZ = z + offsetXZ(rand);
-            worldGenWaterlily.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
-        }
-
-        for(pass = 0; pass < 3; ++pass) {
-            passX = x + offsetXZ(rand);
-            passZ = z + offsetXZ(rand);
-            worldGenReed.generate(world, rand,
-                passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ
-            );
-        }
+        alliumPatch.generate(world, rand, passX, world.getTopSolidOrLiquidBlock(passX, passZ), passZ);
     }
-
 }
